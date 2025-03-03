@@ -18,7 +18,7 @@ def track_company(cnpj):
     'Host': 'portaldatransparencia.gov.br'
   }
   res = requests.get(url, headers=headers)
-  return res.json()['data'][0]
+  return res.json()['data']
 
 
 #getCompanyData('81.076.390/0001-85')
