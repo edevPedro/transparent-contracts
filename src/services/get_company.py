@@ -12,8 +12,8 @@ def get_company(cnpj):
     if company_data:
       print('EMPRESA: ', company_data)
       contracts_cursor= get_contracts(cnpj)
-      contract_data = list(contracts_cursor)
-      print(len(contract_data), 'CONTRATATOS: ', contract_data  )
+      contracts = list(contracts_cursor)
+      print(len(contracts), 'CONTRATOS: ', contracts  )
     if not company_data:
       print('initialing crawler')
       company_data = track_company(cnpj)
@@ -25,9 +25,14 @@ def get_company(cnpj):
         insert_contract(id=i['id'], cnpj=cnpj, data=i)
       print('contracts: ', contracts)
       insert_company(name=company_data[0]['nomeFornecedor'], cnpj=cnpj, data=contracts)
-      return contracts
+      print('inserted')
   except Exception as err:
     print('Error: ', err)
-  return company_data
-
-# get_company('81.076.390/0001-85 ')
+  contracts_data = [] 
+  print('searching contracts...')
+  search_contracts = get_contracts(cnpj)
+  print('found!')
+  for contract in search_contracts:
+    contracts_data.append(contract)
+  print('CONTRACT_DATA: ', contracts_data)
+  return contracts_data

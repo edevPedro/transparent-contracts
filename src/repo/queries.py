@@ -20,4 +20,4 @@ def search_contract(id):
   return collection.find_one({'id': id})
 
 def get_contracts(cnpj):
-  return collection.find({'cnpj': cnpj})
+  return collection.find({'contractOwner': cnpj})
